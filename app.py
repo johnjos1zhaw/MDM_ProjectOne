@@ -11,7 +11,6 @@ app = Flask(__name__)
 #app.secret_key = "super_secret_key"
 app.config['UPLOAD_FOLDER'] = 'uploads'
 
-
 # Set up the ONNX model
 model_path = 'googlenet-12-int8.onnx'
 session = ort.InferenceSession(model_path)
@@ -58,6 +57,23 @@ def predict(img):
         results.append((class_labels[i], round(float(prob[i]), 2)))
     return results
 
+# # Test the preprocessing function with a sample image
+img = Image.open('./sample_images/car.jpg')
+img_np = np.asarray(img)
+input_data = preprocess(img_np)
+print(input_data.shape)
+
+## Test the prediction function with a sample image
+img = Image.open('./sample_images/car.jpg')
+results = predict(img)
+print(results)
+
+# # Test the allowed_file function
+print(allowed_file('./sample_images/car.jpg'))
+
+## display the image
+img.show()
+
 # Define the route for the home page
 @app.route('/')
 def home():
@@ -93,7 +109,6 @@ def upload_file():
     
     # Render the results page with the image and predicted class
     return render_template('results.html', image_name=filename, class_label=top_result[0], probability=top_result[1], results=results)
-
 
 if __name__ == '__main__':
     app.run(debug=True)
