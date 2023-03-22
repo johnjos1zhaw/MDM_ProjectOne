@@ -1,14 +1,75 @@
 
-<!DOCTYPE html>
+<!doctype html>
 <html>
-<head>
-    <title>Image Classifier</title>
-</head>
-<body>
-    <h1>Image Classifier</h1>
+  <head>
+    <title>Image Classification Demo</title>
+    <style>
+      /* Add some basic styles to the page */
+      body {
+        font-family: sans-serif;
+        text-align: center;
+      }
+      img {
+        max-width: 500px;
+        max-height: 500px;
+      }
+      form {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-top: 30px;
+      }
+      label {
+        font-weight: bold;
+        margin-bottom: 10px;
+      }
+      input[type=file] {
+        margin-bottom: 20px;
+      }
+      button[type=submit] {
+        padding: 10px;
+        border-radius: 5px;
+        border: none;
+        background-color: #4CAF50;
+        color: white;
+        font-weight: bold;
+        cursor: pointer;
+      }
+      .result {
+        margin-top: 30px;
+      }
+      .result ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+      .result li {
+        margin-bottom: 10px;
+      }
+      .result li:first-child {
+        font-weight: bold;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Image Classification Demo</h1>
     <form action="/predict" method="post" enctype="multipart/form-data">
-        <input type="file" name="file" id="file" accept="image/*">
-        <button type="submit">Submit</button>
+      <label for="file">Choose an image to classify:</label>
+      <input type="file" name="file" id="file">
+      <button type="submit">Classify</button>
     </form>
-</body>
+    {% if image_name %}
+    <div class="result">
+      <img src="{{ url_for('static', filename='uploads/' + image_name) }}" alt="Uploaded Image">
+      <ul>
+        {% for label, probability in results %}
+        <li>{{ label }}: {{ probability }}</li>
+        {% endfor %}
+      </ul>
+    </div>
+    {% endif %}
+  </body>
 </html>

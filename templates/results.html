@@ -8,9 +8,14 @@
     <img src="{{ url_for('static', filename='uploads/' + image_name) }}" alt="Uploaded Image">
     <p><strong>Top 5 classes:</strong></p>
     <ul>
-    {% for class_name, prob in predicted_classes %}
-      <li>{{ class_name }}: {{ prob }}</li>
+    {% for label, probability in predicted_classes %}
+      <li>{{ label }}: {{ probability }}</li>
     {% endfor %}
     </ul>
   </body>
 </html>
+
+
+
+
+
