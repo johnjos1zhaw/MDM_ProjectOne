@@ -105,13 +105,13 @@ def upload_file():
    # Load the image and predict its class
     img = Image.open(file.stream)
     results = predict(img)
-
+   
     for result in results:
         result[0]
         result[1]
-
+   
     return render_template('results.html', image_name=filename, predicted_classes=results)
 
- 
+    
 if __name__ == '__main__':
     app.run(debug=True)

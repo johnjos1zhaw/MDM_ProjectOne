@@ -1,7 +1,9 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Predicted Results</title>
+    <title>GoogleNet Predicted</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style/results.css') }}">
+    <link rel="icon" type="image/x-icon" href="https://onnx.ai/images/icon/icon-ONNX-logo.svg">
   </head>
   <body>
     <h1>Predicted Results</h1>
@@ -9,8 +11,8 @@
     <p><strong>Top 5 classes:</strong></p>
     <ul>
     {% for label, probability in predicted_classes %}
-      <li>{{ label }}: {{ probability }}</li>
-    {% endfor %}
+      <li><strong>{{ loop.index }}.</strong> {{ label[9:] }}: {{ probability }}</li>
+    {% endfor %}  
     </ul>
   </body>
 </html>

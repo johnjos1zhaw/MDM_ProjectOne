@@ -2,74 +2,26 @@
 <!doctype html>
 <html>
   <head>
-    <title>Image Classification Demo</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style/home.css') }}">
+    <link rel="icon" type="image/x-icon" href="https://onnx.ai/images/icon/icon-ONNX-logo.svg">
+    <title>GoogleNet Home</title>
     <style>
-      /* Add some basic styles to the page */
-      body {
-        font-family: sans-serif;
-        text-align: center;
-      }
-      img {
-        max-width: 500px;
-        max-height: 500px;
-      }
-      form {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        margin-top: 30px;
-      }
-      label {
-        font-weight: bold;
-        margin-bottom: 10px;
-      }
-      input[type=file] {
-        margin-bottom: 20px;
-      }
-      button[type=submit] {
-        padding: 10px;
-        border-radius: 5px;
-        border: none;
-        background-color: #4CAF50;
-        color: white;
-        font-weight: bold;
-        cursor: pointer;
-      }
-      .result {
-        margin-top: 30px;
-      }
-      .result ul {
-        list-style: none;
-        padding: 0;
-        margin: 0;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-      }
-      .result li {
-        margin-bottom: 10px;
-      }
-      .result li:first-child {
-        font-weight: bold;
-      }
     </style>
   </head>
   <body>
-    <h1>Image Classification Demo</h1>
+    <h1>GoogleNet Image Classification<img src ="https://onnx.ai/images/icon/icon-ONNX-logo.svg" width= 50, alt="ONNX"></h1>
+    <p>Model Demonstration by Joshua (Version 1.0)</p>
     <form action="/predict" method="post" enctype="multipart/form-data">
       <label for="file">Choose an image to classify:</label>
       <input type="file" name="file" id="file">
       <button type="submit">Classify</button>
     </form>
-    {% if image_name %}
-    <div class="result">
-      <img src="{{ url_for('static', filename='uploads/' + image_name) }}" alt="Uploaded Image">
-      <ul>
-        {% for label, probability in results %}
-        <li>{{ label }}: {{ probability }}</li>
-        {% endfor %}
-      </ul>
-    </div>
-    {% endif %}
+    <div>
+      <p>Links:<br>
+          <a href="https://github.com/onnx/models/tree/main/vision/classification/inception_and_googlenet/googlenet">Link to the Image Classification model GoogleNet</a>
+          <br>
+          <a href="https://github.com/onnx/models/tree/main/vision/classification/inception_and_googlenet/googlenet#dataset">Dataset</a>
+      </p>
+  </diV>
   </body>
 </html>
