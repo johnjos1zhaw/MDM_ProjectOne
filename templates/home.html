@@ -1,14 +1,27 @@
 
-<!DOCTYPE html>
+<!doctype html>
 <html>
-<head>
-    <title>Image Classifier</title>
-</head>
-<body>
-    <h1>Image Classifier</h1>
+  <head>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style/home.css') }}">
+    <link rel="icon" type="image/x-icon" href="https://onnx.ai/images/icon/icon-ONNX-logo.svg">
+    <title>GoogleNet Home</title>
+    <style>
+    </style>
+  </head>
+  <body>
+    <h1>GoogleNet Image Classification<img src ="https://onnx.ai/images/icon/icon-ONNX-logo.svg" width= 50, alt="ONNX"></h1>
+    <p>Model Demonstration by Joshua (Version 1.0)</p>
     <form action="/predict" method="post" enctype="multipart/form-data">
-        <input type="file" name="file" id="file" accept="image/*">
-        <button type="submit">Submit</button>
+      <label for="file">Choose an image to classify:</label>
+      <input type="file" name="file" id="file">
+      <button type="submit">Classify</button>
     </form>
-</body>
+    <div>
+      <p>Links:<br>
+          <a href="https://github.com/onnx/models/tree/main/vision/classification/inception_and_googlenet/googlenet">Link to the Image Classification model GoogleNet</a>
+          <br>
+          <a href="https://github.com/onnx/models/tree/main/vision/classification/inception_and_googlenet/googlenet#dataset">Dataset</a>
+      </p>
+  </diV>
+  </body>
 </html>
