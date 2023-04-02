@@ -1,5 +1,4 @@
 import os
-import urllib.request
 from flask import Flask, flash, request, redirect, render_template
 from werkzeug.utils import secure_filename
 import onnxruntime as ort
@@ -8,7 +7,7 @@ from PIL import Image
 
 # Set up the Flask app
 app = Flask(__name__)
-#app.secret_key = "super_secret_key"
+app.secret_key = "secret_key"
 app.config['UPLOAD_FOLDER'] = 'static/uploads'
 
 # Set up the ONNX model
@@ -57,23 +56,6 @@ def predict(img):
         results.append((class_labels[i], round(float(prob[i]), 2)))
     return results
 
-# # # Test the preprocessing function with a sample image
-# img = Image.open('./sample_images/car.jpg')
-# img_np = np.asarray(img)
-# input_data = preprocess(img_np)
-# print(input_data.shape)
-
-# ## Test the prediction function with a sample image
-# img = Image.open('./sample_images/car.jpg')
-# results = predict(img)
-# print(results)
-
-# # # Test the allowed_file function
-# print(allowed_file('./sample_images/car.jpg'))
-
-# ## display the image
-# img.show()
-
 # Define the route for the home page
 @app.route('/')
 def home():
@@ -105,13 +87,12 @@ def upload_file():
    # Load the image and predict its class
     img = Image.open(file.stream)
     results = predict(img)
-   
-    for result in results:
-        result[0]
-        result[1]
-   
+    
+    if not results:
+        flash('Error: Could not predict class for uploaded image')
+        return redirect(request.url)
+
     return render_template('results.html', image_name=filename, predicted_classes=results)
 
-    
 if __name__ == '__main__':
     app.run(debug=True)
